@@ -1,0 +1,21 @@
+---
+title: "HW10"
+output: html_document
+---
+
+```{r}
+co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
+```
+
+
+```{r}
+co2_report <- function(country, year){
+  co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
+  co2_data <- co2_data[co2_data$country %in% country, ]
+  return(co2_data$year)
+}
+```
+
+```{r}
+co2_report(country = "Germany", year = X2001)
+```

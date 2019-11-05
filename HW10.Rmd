@@ -1,0 +1,4 @@
+```{r}
+source("./function_HW10.R")
+co2_report("China", 2014)
+```

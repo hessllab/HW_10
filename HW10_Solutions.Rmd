@@ -7,15 +7,63 @@ output: html_document
 co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
 ```
 
+1
 
 ```{r}
 co2_report <- function(country, year){
   co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
-  co2_data <- co2_data[co2_data$country %in% country, ]
-  return(co2_data$year)
+  co2_data <- co2_data[co2_data$country %in% country, year]
+  paste(co2_data, "tonnes CO2 per person per year")
 }
 ```
 
 ```{r}
-co2_report(country = "Germany", year = X2001)
+co2_report(country = "Germany", year = "X2001")
 ```
+
+2
+
+```{r}
+testquant <- quantile(co2_data$X2004, probs = seq(0, 1, 0.1), na.rm = TRUE)
+```
+
+```{r}
+testquant
+```
+
+```{r}
+testquant[2]
+```
+
+
+```{r}
+co2_report <- function(country, year){
+  co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
+  quants <- quantile(co2_data$year, probs = seq(0, 1, 0.1), na.rm = TRUE)
+  gradeA <- quants[9]
+  gradeB <- quants[8]
+  gradeC <- quants[7]
+  gradeD <- quants[6]
+  co2_data <- co2_data[co2_data$country %in% country, year]
+  if (co2_data >= gradeA){
+    paste ("Grade: A;", co2_data, "tonnes CO2 per person per year")
+  }
+  else if (co2_data >= gradeB){
+    paste ("Grade: B;", co2_data, "tonnes CO2 per person per year")
+  }
+  else if (co2_data >= gradeC){
+    paste ("Grade: C;", co2_data, "tonnes CO2 per person per year")
+  }
+  else if (co2_data >= gradeD){
+    paste ("Grade: D;", co2_data, "tonnes CO2 per person per year")
+  }
+  else if (co2_data < gradeD){
+    paste ("Grade: F;", co2_data, "tonnes CO2 per person per year")
+  }
+}
+```
+
+```{r}
+co2_report(country = "Germany", year = "X2001")
+```
+

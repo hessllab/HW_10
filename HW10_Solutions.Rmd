@@ -23,23 +23,14 @@ co2_report(country = "Germany", year = "X2001")
 
 2
 
-```{r}
-testquant <- quantile(co2_data$X2004, probs = seq(0, 1, 0.1), na.rm = TRUE)
-```
-
-```{r}
-testquant
-```
-
-```{r}
-testquant[2]
-```
 
 
 ```{r}
 co2_report <- function(country, year){
   co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
-  quants <- quantile(co2_data$year, probs = seq(0, 1, 0.1), na.rm = TRUE)
+ co2_yearly <- co2_data[[year]]
+ co2_yearly <- na.omit(co2_yearly)
+ quants <- quantile(co2_yearly, probs = seq(0, 1, 0.1))
   gradeA <- quants[9]
   gradeB <- quants[8]
   gradeC <- quants[7]
@@ -64,6 +55,7 @@ co2_report <- function(country, year){
 ```
 
 ```{r}
-co2_report(country = "Germany", year = "X2001")
+co2_report(country = "Japan", year = "X1985")
 ```
+
 

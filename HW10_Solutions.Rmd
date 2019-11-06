@@ -3,6 +3,8 @@ title: "HW10"
 output: html_document
 ---
 
+Zack Grzywacz and Shaun Donmoyer
+
 The following function loads in the CO2 emissions data and returns a report for a country and a given year.
 
 The fucntion must be used as follows: co2_report("country", year). Country must be a character vector and year must be a numeric vector.

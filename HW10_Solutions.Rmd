@@ -3,31 +3,35 @@ title: "HW10"
 output: html_document
 ---
 
-```{r}
-co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
-```
+The following function loads in the CO2 emissions data and returns a report for a country and a given year.
 
-1
+The fucntion must be used as follows: co2_report("country", year). Country must be a character vector and year must be a numeric vector.
 
-```{r}
-co2_report <- function(country, year){
-  co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
-  co2_data <- co2_data[co2_data$country %in% country, year]
-  paste(co2_data, "tonnes CO2 per person per year")
-}
-```
+If country is not a character vector or year is not a numeric vector, then an error is thrown.
 
-```{r}
-co2_report(country = "Germany", year = "X2001")
-```
+The year entered is converted to the "Xyear" format used in the data frame. This is used with a paste function to remove the need to enter X in the input.
 
-2
+A variable is collected containing the co2 data for the year specified.
 
+A count is collected of the number of NA values in this vector, which is returned along with the CO2 data at the output.
+
+From here though, the NA values are omitted from the data.
+
+The data is broken up into quantiles by each 10%. These values are used to decide grade cutoffs. Each grade cutoff is assigned to a variable.
+
+The dataset is then passed through a series of if/else statements to decide what grade a given country receives for the given year. This grade is returned along with the value of CO2 per person per year. In addition, the number of NA values for that year is returned. 
 
 ```{r}
 co2_report <- function(country, year){
   co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
- co2_yearly <- co2_data[[year]]
+  if (!is.character(country)) {
+    stop("country must be a character vector.")
+  }
+  if (!is.numeric(year)) {
+    stop("year must be a numeric vector.")
+  }
+  xyear <- paste0("X", year)
+ co2_yearly <- co2_data[[xyear]]
  nas <- sum(is.na(co2_yearly))
  co2_yearly <- na.omit(co2_yearly)
  quants <- quantile(co2_yearly, probs = seq(0, 1, 0.1))
@@ -35,43 +39,7 @@ co2_report <- function(country, year){
   gradeB <- quants[8]
   gradeC <- quants[7]
   gradeD <- quants[6]
-  co2_data <- co2_data[co2_data$country %in% country, year]
-  if (co2_data >= gradeA){
-    paste ("Grade: A;", co2_data, "tonnes CO2 per person per year.", nas, "values were not available")
-  }
-  else if (co2_data >= gradeB){
-    paste ("Grade: B;", co2_data, "tonnes CO2 per person per year.", nas, "values were not available")
-  }
-  else if (co2_data >= gradeC){
-    paste ("Grade: C;", co2_data, "tonnes CO2 per person per year.", nas, "values were not available")
-  }
-  else if (co2_data >= gradeD){
-    paste ("Grade: D;", co2_data, "tonnes CO2 per person per year.", nas, "values were not available")
-  }
-  else if (co2_data < gradeD){
-    paste ("Grade: F;", co2_data, "tonnes CO2 per person per year.", nas, "values were not available")
-  }
-}
-```
-
-```{r}
-co2_report(country = "Japan", year = "X1985")
-```
-
-3
-
-```{r}
-co2_report <- function(country, year){
-  co2_data <- read.csv("./data/co2_emissions_tonnes_per_person_gapminder.csv")
- co2_yearly <- co2_data[[year]]
- nas <- sum(is.na(co2_yearly))
- co2_yearly <- na.omit(co2_yearly)
- quants <- quantile(co2_yearly, probs = seq(0, 1, 0.1))
-  gradeA <- quants[9]
-  gradeB <- quants[8]
-  gradeC <- quants[7]
-  gradeD <- quants[6]
-  co2_data <- co2_data[co2_data$country %in% country, year]
+  co2_data <- co2_data[co2_data$country %in% country, xyear]
   if (co2_data >= gradeA){
     paste ("Grade: A;", co2_data, "tonnes CO2 per person per year.", nas, "values were not available")
   }
@@ -91,8 +59,8 @@ co2_report <- function(country, year){
 ```
 
 
-
 ```{r}
-xyear <- paste("X", year, sep="")
+co2_report("Kuwait", 2007)
 ```
+
 

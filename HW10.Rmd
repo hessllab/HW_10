@@ -10,4 +10,4 @@ co2_report("China", 2014)
 
 
 Snippet:
-![](./HW10.png)
+![](images/HW10.png)

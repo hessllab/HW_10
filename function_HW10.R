@@ -1,3 +1,4 @@
+# Usage: co2_report <- ("China", 2014)
 co2_report <- function(Country, Year){
 
 # First, tailor the year format from 'yyyy' into 'Xyyyy'.  

@@ -1,4 +1,12 @@
+## Annual Grade Card for a Country's CO2 Emissions Per Capita
+# Namiko Machida and Caleb Malay
+
+#Usage example
 ```{r}
 source("./function_HW10.R")
 co2_report("China", 2014)
 ```
+#Calling the function by typing "co2_report_report("China", 2014)"
+#will return: "Grade:F; 7.4 tonnes CO2 per person per year"
+
+Snippet: ![Alt text] HW10.png

@@ -1,6 +1,14 @@
 # Usage: co2_report <- ("China", 2014)
 co2_report <- function(Country, Year){
 
+# Report errors if inappropriate values are put into the argument.  
+  if (!is.character(Country)) {
+    stop("Country must be a character.")
+  }
+  if (!is.numeric(Year)) {
+    stop("Year must be a numeric value.")
+  }
+
 # First, tailor the year format from 'yyyy' into 'Xyyyy'.  
   Year <- c("X", Year)
   XYear <- paste(Year, collapse = "")
@@ -9,11 +17,16 @@ co2_report <- function(Country, Year){
   emissions <- read.csv(file = "./data/co2_emissions_tonnes_per_person_gapminder.csv")
   target <- emissions[emissions$country == Country, XYear]
 
-# Define quantile values (p10, p20 etc.) by using `quantile` to retrieve the cutoffs for grades.  
-  p10 = quantile(emissions[, XYear], 0.10)
-  p20 = quantile(emissions[, XYear], 0.20)
-  p30 = quantile(emissions[, XYear], 0.30)
-  p40 = quantile(emissions[, XYear], 0.40)
+# Report an error message if the specified data is NA.  
+  if (is.na(target)) {
+    stop("CO2 data for the specified country and year is NA.")
+  }
+  
+# Define quantile values (p10, p20 etc.) by using `quantile` to retrieve the cutoffs for grades. The `na.rm = TRUE` will remove NA value when calculating the quantile value.  
+  p10 = quantile(emissions[, XYear], 0.10, na.rm = TRUE)
+  p20 = quantile(emissions[, XYear], 0.20, na.rm = TRUE)
+  p30 = quantile(emissions[, XYear], 0.30, na.rm = TRUE)
+  p40 = quantile(emissions[, XYear], 0.40, na.rm = TRUE)
 
 # Put the target values (CO2 emission) that were defined above into the grade categories.  
   if (target <= p10){

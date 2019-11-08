@@ -21,11 +21,11 @@ co2_report <- function(Country, Year){
     stop("CO2 data for the specified country and year is NA.")
   }
   
-# Define quantile values (p10, p20 etc.) by using `quantile`.  
-  p10 = quantile(emissions[, XYear], 0.10)
-  p20 = quantile(emissions[, XYear], 0.20)
-  p30 = quantile(emissions[, XYear], 0.30)
-  p40 = quantile(emissions[, XYear], 0.40)
+# Define quantile values (p10, p20 etc.) by using `quantile`. The `na.rm = TRUE` will remove NA value when calculating the quantile value.  
+  p10 = quantile(emissions[, XYear], 0.10, na.rm = TRUE)
+  p20 = quantile(emissions[, XYear], 0.20, na.rm = TRUE)
+  p30 = quantile(emissions[, XYear], 0.30, na.rm = TRUE)
+  p40 = quantile(emissions[, XYear], 0.40, na.rm = TRUE)
 
 # Put the target value (CO2 emission) into the grade categories.  
   if (target <= p10){

@@ -29,7 +29,7 @@ co2_report <- function(Country, Year){
   }
 
 # Report the above results in a human readable format. 
-# Example result: "7.4 tonnes CO2 per person per year"
+# Example result: "Grade:F; 7.4 tonnes CO2 per person per year"
   grade_report <- c("Grade:", grade, ";")
   grade_sentence <- paste(grade_report, collapse = "")
   emission_report <- c("tonnes", "CO2", "per", "person", "per", "year")

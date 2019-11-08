@@ -37,7 +37,7 @@ co2_report <- function(Country, Year){
     grade <- "C"
   } else if (target <= p40){
     grade <- "D"
-  } else{
+  } else {
     grade <- "F"
   }
 

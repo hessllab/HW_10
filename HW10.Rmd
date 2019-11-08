@@ -1,6 +1,15 @@
 ## Annual Grade Card for a Country's CO2 Emissions Per Capita
 # Namiko Machida and Caleb Malay HW 10
 
+# This function allows the user to input a country and year of their choosing and reports a grade for the tonnes of CO2 released per person per year for that country. 
+
+# The grading is based on the following criteria:
+A - Bottom 10% of emitters in that year
+B - Bottom 11-20% emitters in that year
+C - Bottom 21-30% emitters in that year
+D - Bottom 31-40% emitters in that year
+F - Greater than 40% of emitters in that year
+
 #Usage example:
 ```{r}
 source("./function_HW10.R")

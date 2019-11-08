@@ -16,6 +16,11 @@ co2_report <- function(Country, Year){
   emissions <- read.csv(file = "./data/co2_emissions_tonnes_per_person_gapminder.csv")
   target <- emissions[emissions$country == Country, XYear]
 
+# Report an error message if the specified data is NA.  
+  if (is.na(target)) {
+    stop("CO2 data for the specified country and year is NA.")
+  }
+  
 # Define quantile values (p10, p20 etc.) by using `quantile`.  
   p10 = quantile(emissions[, XYear], 0.10)
   p20 = quantile(emissions[, XYear], 0.20)

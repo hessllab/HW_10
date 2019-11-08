@@ -1,5 +1,13 @@
 co2_report <- function(Country, Year){
 
+# Report errors if inappropriate values are put into the argument.  
+  if (!is.character(Country)) {
+    stop("Country must be a character.")
+  }
+  if (!is.numeric(Year)) {
+    stop("Year must be a numeric value.")
+  }
+
 # First, tailor the year format from 'yyyy' into 'Xyyyy'.  
   Year <- c("X", Year)
   XYear <- paste(Year, collapse = "")
